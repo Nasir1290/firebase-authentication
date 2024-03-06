@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default function () {
   return (
-    <div>
-      <h1 className=" text-3xl bg-emerald-500 p-4 rounded-md">Hllo</h1>
-    </div>
-  )
+    <Router>
+      <div>
+        <Routes>
+          <Route />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
