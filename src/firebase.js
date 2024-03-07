@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 
 // Your web app's Firebase configuration
@@ -20,6 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
+const googleAuth = new GoogleAuthProvider();
 
 const registerWithEmailAndPassword = async (email, password) => {
     try {
@@ -41,5 +42,18 @@ const loginWthEmailAndPassword = async (email, password) => {
     }
 }
 
+const resetPassword = async (email) => {
+    try {
+        await sendPasswordResetEmail(auth, email)
+    } catch (err) {
+        throw err;
+    }
+}
 
-export { registerWithEmailAndPassword ,loginWthEmailAndPassword};
+const socialLogin = async () => {
+    const res = await signInWithPopup(auth,googleAuth);
+    const user = res.user;
+    return user;
+}
+
+export { registerWithEmailAndPassword, loginWthEmailAndPassword, auth, resetPassword ,socialLogin};
