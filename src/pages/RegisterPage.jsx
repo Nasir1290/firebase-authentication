@@ -61,8 +61,6 @@ const RegisterPage = () => {
                   </a>
                 </p>
               </div>
-
-
             </form>
           </div>
         </div>

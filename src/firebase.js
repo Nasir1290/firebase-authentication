@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyA76mSAbIxy4QdtR44sumBxZR8TiW-XpUI",
@@ -15,3 +17,15 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const registerWithEmailAndPassword = async (email, password) => {
+    try {
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        const user = await res.user;
+        console.log(user);
+    } catch (err) {
+        console.error(err);
+    }
+}   
